@@ -13,7 +13,7 @@ namespace SeleniumTutorial
     [TestFixture]
     public class TestClass : BaseTest
     {
-        [Test]
+        [Test, Category("Smoke Testing")]
         public void TestMethod1()
         {
             //IWebDriver driver = new ChromeDriver();
@@ -23,14 +23,14 @@ namespace SeleniumTutorial
             //driver.Quit();
         }
 
-        [Test]
+        [Test, Category("Regression Testing")]
         public void TestMethod2()
         { 
             IWebElement emailTextField = driver.FindElement(By.XPath(".//*[@id='email']"));
             emailTextField.SendKeys("Selenium C#");
         }
 
-        [Test]
+        [Test, Category("Smoke Testing")]
         public void TestMethod3()
         {
             IWebElement emailTextField = driver.FindElement(By.XPath(".//*[@id='email']"));
