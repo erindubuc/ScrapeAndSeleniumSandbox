@@ -11,6 +11,71 @@ namespace HAP_Examples
     {
         static void Main(string[] args)
         {
+            var html = @"
+               <body>
+	           <h1>Here is showing how to list child nodes</h1>  
+	           <h2>Technology Crowds</h2>
+               <h3>www.TechnologyCrowds.com</h3>
+	           </body>";
+
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+
+
+            // Traversing the DOM
+            // retrieve the child nodes from the HTML content using the ChildNodes method
+            var htmlBody = htmlDoc.DocumentNode.SelectSingleNode("//body");
+
+            /*
+            HtmlNodeCollection childNodes = htmlBody.ChildNodes;
+            foreach (var node in childNodes)
+            {
+                if (node.NodeType == HtmlNodeType.Element)
+                {
+                    Console.WriteLine("ChildNode OuterHtml: ");
+                    Console.WriteLine(node.OuterHtml);
+                }
+            }
+            Console.WriteLine();
+            */
+
+            // Retreiving the FIRST childNode
+            HtmlNode firstChild = htmlBody.FirstChild;
+            Console.WriteLine("FirstChild OuterHtml: ");
+            Console.WriteLine(firstChild.InnerText);
+
+            Console.WriteLine();
+
+            // Retreiving the LAST childNode
+            HtmlNode lastChild = htmlBody.LastChild;
+            Console.WriteLine("LastChild OuterHtml: ");
+            Console.WriteLine(lastChild.InnerText);
+
+
+            // Gets the NextSibling --> will go all the way down before parent ends
+            var node = htmlDoc.DocumentNode.SelectSingleNode("//body/h1");
+
+            HtmlNode sibling = node.NextSibling;
+
+            while (sibling != null)
+            {
+                if (sibling.NodeType == HtmlNodeType.Element)
+                {
+                    Console.WriteLine("NextSibling OuterHtml: ");
+                    Console.WriteLine(sibling.OuterHtml);
+                }
+
+                sibling = sibling.NextSibling;
+            }
+
+            // Gets ParentNode
+            HtmlNode parentNode = node.ParentNode;
+            Console.WriteLine("ParentNode: ");
+            Console.WriteLine(parentNode.Name);
+
+
+            /*
             var html =
                 @"<body>
                 <h1>.Net Core</h1>
@@ -23,26 +88,7 @@ namespace HAP_Examples
                 </p>
                 </body>";
 
-
-            /*
-            var html = @"
-                <td>
-                </td>
-                <td>
-                <input value = 'Technology'>
-                <input value = 'Crowds'>
-                </td>
-                <td>
-                <span> Can I get this?
-                </span>
-                </td>";
-            */
-
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
             var htmlNodes = htmlDoc.DocumentNode.SelectNodes("//body/p");
-
 
             // Gets InnerHTML content present within the boundaries of opening 
             // and closing tags of the mentioned HTML object
@@ -74,8 +120,21 @@ namespace HAP_Examples
 
             HtmlNode parentNode = parent.ParentNode;
             Console.WriteLine($"The name of the parent node is: {parentNode.Name}");
+            */
 
             /*
+            var html = @"
+                <td>
+                </td>
+                <td>
+                <input value = 'Technology'>
+                <input value = 'Crowds'>
+                </td>
+                <td>
+                <span> Can I get this?
+                </span>
+                </td>";
+
             // SELECT ALL NODES that match with the expressions of the type 
             var nodes = htmlDoc.DocumentNode.SelectNodes("//td/input");
 
