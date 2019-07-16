@@ -12,21 +12,16 @@ namespace HAP_Examples
         static void Main(string[] args)
         {
 
-
-
-
-
-
-
-
-
-            
             var html = @"
                 <td>
                 </td>
                 <td>
                 <input value = 'Technology'>
                 <input value = 'Crowds'>
+                </td>
+                <td>
+                <span> Can I get this?
+                </span>
                 </td>";
 
             var htmlDoc = new HtmlDocument();
@@ -42,11 +37,12 @@ namespace HAP_Examples
             }
             */
 
-            
+
             // SELECT FIRST NODE that matches the given XPath expression
-            var node = htmlDoc.DocumentNode.SelectNodes("//td/input").First()
-                .Attributes["value"].Value;
-            Console.WriteLine(node);
+            //var node = htmlDoc.DocumentNode.SelectNodes("//td/input").First()
+            //    .Attributes["value"].Value;
+            var node = htmlDoc.DocumentNode.SelectSingleNode("//td/span");
+            Console.WriteLine(node.InnerText);
             
             
             /*
